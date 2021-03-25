@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, FlatList, TouchableOpacity, View } from 'react-native';
 import * as Location from 'expo-location';
 
 // Componentes
@@ -80,6 +80,10 @@ export default function Home() {
       <Header background={background} weather={weather} icon={icon} />
 
       <Conditions weather={weather} />
+
+      <View style={styles.contentForecast}>
+        <Text style={styles.titleForecast}>Previsão da semana</Text>
+      </View>
       
       <FlatList 
         showsHorizontalScrollIndicator={false}
@@ -121,5 +125,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     fontStyle: 'italic',
+  },
+  contentForecast: {
+    width: '90%',
+    height: 'auto',
+    marginTop: 15,
+  },
+  titleForecast: {
+    width: '100%',
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'left',
   },
 })

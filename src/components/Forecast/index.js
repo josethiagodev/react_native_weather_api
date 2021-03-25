@@ -8,7 +8,7 @@ export default function Forecast({ data }) {
   let icon = condition(data.condition)
 
   return (
-    <View style={styles.container}>
+    <View style={styles.content}>
       <Text style={styles.date}>{data.date}</Text>
       <Ionicons name={icon.name} color={icon.color} style={styles.icon} />
 
@@ -21,14 +21,14 @@ export default function Forecast({ data }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginRight: 14,
-    paddingTop: 0,
+    marginRight: 15,
+    paddingTop: 10,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingBottom: 0,
+    paddingBottom: 10,
     borderRadius: 8,
     backgroundColor: 'rgba(35, 35, 50, 1)',
   },
@@ -52,5 +52,5 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
-  }
+  },
 })

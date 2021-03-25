@@ -15,7 +15,9 @@ export default function Header({ background, weather, icon }) {
 
       <Entypo name="cloud" style={styles.iconCloud} />
 
-      <Text style={styles.degrees}>{weather.results.temp}°</Text>
+      <Text style={styles.degrees}>
+        {weather.results.temp}°
+      </Text>
     </LinearGradient>
   );
 }
@@ -32,12 +34,12 @@ const styles = StyleSheet.create({
   date: {
     marginBottom: 5,
     color: '#FFF',
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
   },
   city: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   iconCloud: {

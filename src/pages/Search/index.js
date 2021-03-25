@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Keyboard, Text } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
 
 import { useNavigation } from '@react-navigation/native';
 
 import api, { key } from '../../services/api';
 import { LinearGradient } from 'expo-linear-gradient';
 import Conditions from '../../components/Conditions';
+import ModalForecast from '../../components/ModalForecast';
 
 export default function Search() {
   const navigation = useNavigation();
@@ -40,17 +40,20 @@ export default function Search() {
   if(city) {
     return (
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={ () => navigation.navigate('Home') }
-        >
-          <Ionicons
-            name="arrow-back-sharp" 
-            style={styles.iconBack}
-          />
-          <Text style={styles.titleSearch}>Minha cidade</Text>
-        </TouchableOpacity>
 
+        <View style={styles.headerSearch}>
+          <TouchableOpacity 
+            style={styles.buttonHeader} 
+            onPress={ () => navigation.navigate('Home') }
+          >
+            <Ionicons
+              name="arrow-back-sharp" 
+              style={styles.iconHeader}
+            />
+          </TouchableOpacity>
+          <Text style={styles.textHeader}>Buscar cidade</Text>
+        </View>
+      
         <View style={styles.searchBox}>
           <TextInput 
             value={input} 
@@ -66,12 +69,15 @@ export default function Search() {
           </TouchableOpacity>
         </View>
 
-        <LinearGradient style={styles.searchResult} colors={['#5ADEFF', '#00CBFE', '#00BDFE', '#00AAE5']}>
-          <Text style={styles.textDate}>{city.results.date}</Text>
+        <LinearGradient style={styles.searchResult} colors={['#5B86E5', '#00BDFE', '#00CBFE', '#5ADEFF']}>
           <Text style={styles.textCity}>{city.results.city_name}</Text>
           <Text style={styles.textTemp}>{city.results.temp}°</Text>
+          
           <Conditions weather={city} />
+
+          <ModalForecast weather={city} />
         </LinearGradient>
+        
       </SafeAreaView>
     )
   }
@@ -80,15 +86,18 @@ export default function Search() {
   return (
     <SafeAreaView style={styles.container}>
 
-      <TouchableOpacity 
-        style={styles.backButton} 
-        onPress={ () => navigation.navigate('Home') }
-      >
-        <Ionicons
-          name="arrow-back-sharp" 
-          style={styles.iconBack}
-        />
-      </TouchableOpacity>
+      <View style={styles.headerSearch}>
+        <TouchableOpacity 
+          style={styles.buttonHeader} 
+          onPress={ () => navigation.navigate('Home') }
+        >
+          <Ionicons
+            name="arrow-back-sharp" 
+            style={styles.iconHeader}
+          />
+        </TouchableOpacity>
+        <Text style={styles.textHeader}>Buscar cidade</Text>
+      </View>
 
       <View style={styles.searchBox}>
         <TextInput 
@@ -119,22 +128,32 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
     width: '100%',
+    height: '100%',
     paddingTop: '8%',
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: 'rgb(18, 18, 20)',
   },
-  backButton: {
-    alignItems: 'center',
+  headerSearch: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    height: 'auto',
   },
-  iconBack: {
-    fontSize: 30,
-    color: '#FFF',
+  buttonHeader: {
+    width: 'auto',
+    height: 'auto',
   },
-  titleSearch: {
-    fontSize: 18,
+  iconHeader: {
     color: '#FFF',
+    fontSize: 25,
+  },
+  textHeader: {
+    width: 'auto',
+    height: 'auto',
+    color: '#FFFFFF',
+    fontSize: 16.5,
     fontWeight: '600',
     marginLeft: 15,
   },
@@ -194,10 +213,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginTop: 30,
-    paddingTop: 30,
+    paddingTop: 35,
     paddingLeft: 5,
     paddingRight: 5,
-    paddingBottom: 25,
+    paddingBottom: 30,
     borderRadius: 8,
   },
   textDate: {
